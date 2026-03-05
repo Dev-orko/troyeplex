@@ -1,0 +1,6 @@
+{
+  "name": "@dataconnect/generated",
+  "version": "1.0.0",
+  "main": "index.cjs.js",
+  "types": "index.d.ts"
+}

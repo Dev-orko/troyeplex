@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Troyeplex</title>
+    
+    <!-- Permissive CSP for streaming -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self' https: http: data: blob:;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:;
+      style-src 'self' 'unsafe-inline' https: http:;
+      img-src 'self' data: https: http:;
+      media-src 'self' https: http: blob: data:;
+      frame-src 'self' https: http:;
+      connect-src 'self' https: http:;
+      font-src 'self' https: http: data:;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    ">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
