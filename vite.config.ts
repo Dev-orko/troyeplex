@@ -10,6 +10,7 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'esbuild',
+    chunkSizeWarningLimit: 1600,
     rollupOptions: {
       output: {
         manualChunks: undefined
