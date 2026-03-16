@@ -5,6 +5,7 @@ import { FiPlay, FiInfo, FiPlus, FiStar } from 'react-icons/fi'
 import useSWR from 'swr'
 import axios from 'axios'
 import { API_CONFIG } from '../../config/api'
+import { useBreakpoint } from '../../hooks/useBreakpoint'
 
 const fetcher = (url: string) => axios.get(url).then(r => r.data)
 
@@ -131,6 +132,7 @@ function TrailerLayer({ trailerKey, uid }: { trailerKey: string; uid: number }) 
 
 /* ─── Hero ──────────────────────────────────────────────────────────────── */
 const Hero: React.FC<HeroProps> = ({ variant = 'all' }) => {
+  const { isMobile, isTablet } = useBreakpoint()
   const endpoint = variant === 'movie' ? '/trending/movie/day'
     : variant === 'tv'    ? '/trending/tv/day'
     : '/trending/all/day'
@@ -222,7 +224,8 @@ const Hero: React.FC<HeroProps> = ({ variant = 'all' }) => {
   return (
     <div style={{
       position: 'relative', width: '100%',
-      height: '57vh', minHeight: 380,
+      height: isMobile ? '50vh' : '57vh',
+      minHeight: isMobile ? 320 : 380,
       overflow: 'hidden',
       background: '#080808',
       opacity: ready ? 1 : 0,
@@ -268,7 +271,7 @@ const Hero: React.FC<HeroProps> = ({ variant = 'all' }) => {
       <div style={{
         position: 'absolute', inset: 0, zIndex: 3,
         display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-        padding: '0 52px 48px',
+        padding: isMobile ? '0 20px 36px' : isTablet ? '0 36px 44px' : '0 52px 48px',
       }}>
         <AnimatePresence mode="wait">
           <motion.div
@@ -389,7 +392,8 @@ const Hero: React.FC<HeroProps> = ({ variant = 'all' }) => {
                   display: 'flex', alignItems: 'center', gap: 8,
                   background: 'white', color: '#080808',
                   border: 'none', borderRadius: 10, cursor: 'pointer',
-                  padding: '11px 26px', fontSize: '0.86rem', fontWeight: 900,
+                  padding: isMobile ? '10px 20px' : '11px 26px',
+                  fontSize: isMobile ? '0.8rem' : '0.86rem', fontWeight: 900,
                   letterSpacing: '-0.01em',
                   boxShadow: '0 4px 22px rgba(255,255,255,0.14)',
                 }}
@@ -416,7 +420,8 @@ const Hero: React.FC<HeroProps> = ({ variant = 'all' }) => {
                   background: 'rgba(255,255,255,0.08)',
                   border: '1px solid rgba(255,255,255,0.16)',
                   borderRadius: 10, cursor: 'pointer',
-                  padding: '11px 20px', fontSize: '0.86rem', fontWeight: 700,
+                  padding: isMobile ? '10px 16px' : '11px 20px',
+                  fontSize: isMobile ? '0.8rem' : '0.86rem', fontWeight: 700,
                   color: 'white', backdropFilter: 'blur(14px)',
                 }}
               >
@@ -429,7 +434,7 @@ const Hero: React.FC<HeroProps> = ({ variant = 'all' }) => {
                 whileHover={{ scale: 1.1, background: 'rgba(255,255,255,0.13)' }}
                 whileTap={{ scale: 0.9 }}
                 style={{
-                  width: 42, height: 42, borderRadius: '50%', flexShrink: 0,
+                  width: isMobile ? 36 : 42, height: isMobile ? 36 : 42, borderRadius: '50%', flexShrink: 0,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   background: 'rgba(255,255,255,0.07)',
                   border: '1.5px solid rgba(255,255,255,0.15)',
@@ -446,8 +451,8 @@ const Hero: React.FC<HeroProps> = ({ variant = 'all' }) => {
       {/* ── Layer 4: Progress bar strip ── */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 4,
-        padding: '0 52px 15px',
-        display: 'flex', alignItems: 'center', gap: 5,
+        padding: isMobile ? '0 20px 12px' : isTablet ? '0 36px 14px' : '0 52px 15px',
+        display: 'flex', alignItems: 'center', gap: isMobile ? 4 : 5,
       }}>
         {movies.map((_, i) => (
           <button
